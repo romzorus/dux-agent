@@ -1,0 +1,8 @@
+Package: dux-agent
+Version: PLACEHOLDER_FOR_VERSION
+Section: base
+Priority: optional
+Architecture: all
+Maintainer: romzorus <romzorus591@gmail.com>
+Description: An automation agent, regularly applying a configuration to localhost. This configuration can be fetched from multiple sources.
+Homepage: https://gitlab.com/dux-tool/dux
