@@ -9,7 +9,7 @@ Instead of having one big automation tool (meaning configuration management or o
 This repository contains one implementation example : the agent version. One binary running as a service and regularly applying to localhost a configuration (task list). This configuration can be taken from a local file or fetched from a URL or a remote git repository. It allows to have "self-sufficient" hosts in a sense. The user only has to update a file on a server and let the hosts grab it and apply it to themselves.
 
 <div align="center">
-<img src="" width="70%">
+<img src="img/agent-illustration.png" width="70%">
 </div>
 
 # Usage
