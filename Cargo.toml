@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-duxcore = { git = "https://gitlab.com/dux-tool/duxcore.git", branch = "dev"}
 serde = {version = "1.0.188", features= ["derive"]}
 config = "0.14.0"
 clap = { version = "4.5.3", features = ["derive"] }
+duxcore = "0.1.1"
