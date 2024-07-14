@@ -44,6 +44,7 @@ build-dux-agent-for-fedora:
 
 upload-to-package-registry:
   stage: deploy
+  image: curlimages/curl:8.8.0
   script:
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file building/deb/dux-agent-$DUX_VERSION.deb "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/dux-agent/$DUX_VERSION/dux-agent-$DUX_VERSION.deb"'
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file dux-agent-$DUX_VERSION.rpm "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/dux-agent/$DUX_VERSION/dux-agent-$DUX_VERSION.rpm"'
