@@ -8,13 +8,14 @@ pub struct DuxConfigAgent {
 }
 
 impl DuxConfigAgent {
+    // Default configuration is a local "tasklist.yaml" file located in the same folder as the binary
     pub fn default() -> DuxConfigAgent {
         DuxConfigAgent {
             source: Source {
                 method: Some("local".to_string()),
                 url: None,
                 branch: None,
-                path: Some("/tmp/dux/tasklist.yaml".to_string()),
+                path: Some("tasklist.yaml".to_string()),
             },
         }
     }
