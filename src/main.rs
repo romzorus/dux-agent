@@ -1,3 +1,4 @@
+use duxcore::connection::connectionmode::localhost::WhichUser;
 use duxcore::prelude::*;
 use std::collections::HashMap;
 use std::process::exit;
@@ -24,9 +25,7 @@ async fn main() {
         Some(value) => value,
         None => match conf.source.method {
             Some(value) => match value.to_lowercase().as_str() {
-                "local" => {
-                    tasklist_get_from_file(conf.source.path.unwrap().as_str())
-                },
+                "local" => tasklist_get_from_file(conf.source.path.unwrap().as_str()),
                 "http" => {
                     assert_ne!(conf.source.url, None);
                     connection::http_https::http_https_get_file(conf.source.url.unwrap()).await
@@ -45,11 +44,8 @@ async fn main() {
         },
     };
 
-    
-
     let tasklist = tasklist_parser(
-        tasklist_content
-        ,
+        tasklist_content,
         &Host::from_string("localhost".to_string()),
     );
 
@@ -68,6 +64,31 @@ async fn main() {
         }
     }
 
+    let connection_details = match cliargs.user {
+        Some(username) => {
+            match cliargs.password {
+                Some(password) => {
+                    LocalHostConnectionDetails::user(
+                        WhichUser::UsernamePassword(
+                            Credentials {
+                                username,
+                                password
+                            }
+                        )
+                    )
+                }
+                None => {
+                    LocalHostConnectionDetails::user(
+                        WhichUser::PasswordLessUser(username)
+                    )
+                }
+            }
+        }
+        None => {
+            LocalHostConnectionDetails::current_user()
+        }
+    };
+
     let mut assignment = Assignment::from(
         correlationid.get_new_value().unwrap(), // This unwrap() is safe because initialization is checked before.
         RunningMode::Apply,
@@ -75,7 +96,7 @@ async fn main() {
         HostHandlingInfo::from(
             ConnectionMode::LocalHost,
             "localhost".to_string(),
-            ConnectionDetails::LocalHost(LocalHostConnectionDetails::current_user()),
+            ConnectionDetails::LocalHost(connection_details),
         ),
         HashMap::new(),
         tasklist.clone(),
