@@ -1,6 +1,4 @@
-use duxcore::connection::connectionmode::localhost::WhichUser;
 use duxcore::prelude::*;
-use std::collections::HashMap;
 use std::process::exit;
 
 mod cliargs;

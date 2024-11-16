@@ -7,7 +7,9 @@ edition = "2021"
 serde = {version = "1.0.209", features= ["derive"]}
 config = "0.14.0"
 clap = { version = "4.5.9", features = ["derive"] }
-# duxcore = "0.1.4"
-duxcore = { git = "https://gitlab.com/dux-tool/duxcore.git", branch = "main" }
+duxcore = "0.1.9"
 tokio = { version = "1.40.0", features = ["full"] }
 reqwest = "0.12.7"
+
+[profile.release]
+lto = true
